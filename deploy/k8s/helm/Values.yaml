@@ -1,0 +1,35 @@
+namespace: demos
+deployment:
+  name: scheduler-v1
+  replicas: 1
+  annotations:
+    - key: "app.kubernetes.io/managed-by"
+      value: "Helm"
+    - key: "meta.helm.sh/release-name"
+      value: "scheduler-v1"
+    - key: "meta.helm.sh/release-namespace"
+      value: "demos"
+app:
+  name: scheduler
+  version: v1
+  istioAutoInject: true
+  containerImage: image-registry.openshift-image-registry.svc:5000/demos/scheduler:v1
+  labels: []
+  ports:
+    - name: http
+      port: 8080
+  env:
+    - name: POSTGRESCLUSTER_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: hippo-pguser-hippo
+          key: user
+          optional: false
+    - name: POSTGRESCLUSTER_JDBC-URI
+      valueFrom:
+        secretKeyRef:
+          name: hippo-pguser-hippo
+          key: jdbc-uri
+          optional: false
+
+imagePullPolicy: Always

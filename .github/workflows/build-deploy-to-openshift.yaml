@@ -1,0 +1,4 @@
+name: build-deploy-to-openshift
+on: [ push, workflow_dispatch ]
+
+jobs:
