@@ -24,3 +24,5 @@ hs_err_pid*
 
 target
 .odo/odo-file-index.json
+
+.DS_Store
