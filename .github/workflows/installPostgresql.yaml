@@ -10,9 +10,9 @@ jobs:
       name: login to cluster
       uses: redhat-actions/oc-login@v1
       with:
-        openshift_server_url: {{ secrets.API_SERVER }}
-        openshift_username: {{ secrets.USERNAME }}
-        openshift_password: {{ secrets.PASSWORD }}
+        openshift_server_url: ${{ secrets.API_SERVER }}
+        openshift_username: ${{ secrets.USERNAME }}
+        openshift_password: ${{ secrets.PASSWORD }}
         insecure_skip_tls_verify: true
     - id: install-operators
       name: install operators
@@ -25,9 +25,9 @@ jobs:
         name: login to cluster
         uses: redhat-actions/oc-login@v1
         with:
-          openshift_server_url: { { secrets.API_SERVER } }
-          openshift_username: { { secrets.USERNAME } }
-          openshift_password: { { secrets.PASSWORD } }
+          openshift_server_url: ${{ secrets.API_SERVER } }
+          openshift_username: ${{ secrets.USERNAME } }
+          openshift_password: ${{ secrets.PASSWORD } }
           insecure_skip_tls_verify: true
       - id: create-postgresqlcluster
         name: create postgresql cluster
