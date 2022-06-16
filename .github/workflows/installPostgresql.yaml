@@ -16,7 +16,7 @@ jobs:
         insecure_skip_tls_verify: true
     - id: install-operators
       name: install operators
-      run: helm upgrade -i install-operators ./deploy/k8s/helm/install-operators -f ./deploy/k8s/helm/install-operators/values.yaml
+      run: helm upgrade -i install-operators ./deploy/k8s/helm/install-operators -f ./deploy/k8s/helm/install-operators/Values.yaml
   create-cluster:
     runs-on: ubuntu-latest
     steps:
@@ -31,4 +31,4 @@ jobs:
           insecure_skip_tls_verify: true
       - id: create-postgresqlcluster
         name: create postgresql cluster
-        run: helm upgrade -i create-postgresqlcluster ./deploy/k8s/helm/create-postgresqlcluster -f ./deploy/k8s/helm/create-postgresqlcluster/values.yaml
+        run: helm upgrade -i create-postgresqlcluster ./deploy/k8s/helm/create-postgresqlcluster -f ./deploy/k8s/helm/create-postgresqlcluster/Values.yaml
