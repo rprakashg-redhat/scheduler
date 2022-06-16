@@ -1,0 +1,51 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: scheduler-pipeline
+spec:
+  params:
+    - name: NAME
+      description: Name of application
+      type: string
+      default: scheduler      
+    - name: GITURL
+      description: The application git repository url
+      type: string
+      default: 'https://github.com/rprakashg-redhat/scheduler.git'
+    - name: BRANCH
+      description: git repository branch
+      type: string
+      default: main            
+  tasks:
+    - name: git-clone
+      params:
+        - name: url
+          value: $(params.GITURL)
+        - name: revision
+          value: $(params.BRANCH)
+        - name: submodules
+          value: 'true'
+        - name: depth
+          value: '1'
+        - name: sslVerify
+          value: 'true'
+        - name: deleteExisting
+          value: 'true'
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: app-source
+    - name: build-image
+    
+    - name: deploy
+      params:
+        - name: charts_dir
+          value: $()/deploy/k8s/helm
+      taskRef:
+        kind: ClusterTask
+        name: ""
+
+  workspaces:
+    - name: app-source

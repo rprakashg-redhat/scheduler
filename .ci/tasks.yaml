@@ -1,0 +1,12 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: container-image-build
+spec:
+  workspaces:
+
+  steps:
+  - name: build
+    image: maven:3.6.0-jdk-8-slim
+

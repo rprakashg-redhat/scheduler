@@ -1,4 +1,4 @@
-namespace: keysight-demos
+namespace: schedule
 deployment:
   name: scheduler-v1
   replicas: 1
@@ -8,12 +8,12 @@ deployment:
     - key: "meta.helm.sh/release-name"
       value: "scheduler-v1"
     - key: "meta.helm.sh/release-namespace"
-      value: "keysight-demos"
+      value: "schedule"
 app:
   name: scheduler
   version: v1
   istioAutoInject: true
-  containerImage: image-registry.openshift-image-registry.svc:5000/keysight-demos/scheduler:v1
+  containerImage: image-registry.openshift-image-registry.svc:5000/schedule/scheduler:v1
   labels: []
   ports:
     - name: http

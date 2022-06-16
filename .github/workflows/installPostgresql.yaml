@@ -1,0 +1,30 @@
+name: Install postgresql
+on:
+  workflow_dispatch:
+jobs:
+  install-operator:
+    runs-on: ubuntu-latest
+    steps:
+    - id: install-operator
+      name: install postgresql operator
+      uses: actions/checkout@v2
+      uses: redhat-actions/oc-login@v1
+      with:
+        openshift_server_url: {{ secrets.API_SERVER }}
+        openshift_username: {{ secrets.USERNAME }}
+        openshift_password: {{ secrets.PASSWORD }}
+        insecure_skip_tls_verify: true
+      run: helm upgrade -i install-operators ./deploy/k8s/helm/install-operators -f ./deploy/k8s/helm/install-operators/values.yaml
+  create-cluster:
+    runs-on: ubuntu-latest
+    steps:
+      - id: create-cluster
+        name: create postgresql cluster
+        uses: actions/checkout@v2
+        uses: redhat-actions/oc-login@v1
+        with:
+          openshift_server_url: { { secrets.API_SERVER } }
+          openshift_username: { { secrets.USERNAME } }
+          openshift_password: { { secrets.PASSWORD } }
+          insecure_skip_tls_verify: true
+        run: helm upgrade -i create-postgresqlcluster ./deploy/k8s/helm/create-postgresqlcluster -f ./deploy/k8s/helm/create-postgresqlcluster/values.yaml

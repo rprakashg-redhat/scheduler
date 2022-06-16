@@ -1,4 +1,14 @@
 name: build-deploy-to-openshift
-on: [ push, workflow_dispatch ]
+on:
+  push:
+    - main
 
 jobs:
+  build:
+    name: "Source to container"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      -
+  deploy:
