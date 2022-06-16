@@ -1,6 +1,7 @@
 name: build-deploy-to-openshift
 on:
   push:
+    branches:
     - main
 
 jobs:
@@ -10,5 +11,4 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      -
   deploy:
