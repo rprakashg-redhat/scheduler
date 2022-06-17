@@ -1,8 +1,37 @@
 # scheduler Project
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+Microservice built using Quarkus, the Supersonic Subatomic Java Framework, hibernate, panache and postgresql database
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+
+## Install required operators
+Run the command below to install operators 
+
+```
+helm upgrade -i install-operators ./deploy/k8s/helm/install-operators -f ./deploy/k8s/helm/install-operators/Values.yaml
+```
+
+## Create an instance of Postgresql cluster
+Run command below to create the Postgresql cluster
+
+```
+helm upgrade -i create-postgresqlcluster ./deploy/k8s/helm/create-postgresqlcluster -f ./deploy/k8s/helm/create-postgresqlcluster/Values.yaml
+```
+
+## Building the application
+This project is configured to use quarkus openshift extension
+
+When we created the postgresql cluster in step before, a project named schedule is already created on the openshift cluster, be sure to set the project to that by running that command below
+
+```
+oc project schedule
+```
+
+Package the application into a container image. We are using the builtin container registry in OpenShift, you can always change this in the properties file if you want to push the container image to an external registry, be sure to login to that registry using podman before if you decide to do that.
+
+```
+./mvnw clean package -Dquarkus.container-image.build=true
+```
 
 ## Running the application in dev mode
 
