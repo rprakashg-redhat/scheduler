@@ -1,8 +1,0 @@
-apiVersion: project.openshift.io/v1
-description: "Schedule project"
-displayName: {{ .Values.namespace }}
-kind: ProjectRequest
-metadata:
-  name: {{ .Values.namespace }}
-  labels:
-    name: {{ .Values.namespace }}

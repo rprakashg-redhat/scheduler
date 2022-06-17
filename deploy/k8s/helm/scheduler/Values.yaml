@@ -19,7 +19,7 @@ app:
     - name: http
       port: 8080
   env:
-    - name: POSTGRESCLUSTER_USERNAME
+    - name: POSTGRESCLUSTER_USER
       valueFrom:
         secretKeyRef:
           name: hippo-pguser-hippo
